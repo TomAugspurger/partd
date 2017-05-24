@@ -5,9 +5,10 @@ Alongside each array x we ensure the value x.dtype which stores the string
 description of the array's dtype.
 """
 from __future__ import absolute_import
+
 import numpy as np
 from toolz import valmap, identity, partial
-from .compatibility import pickle
+from .compatibility import pickle, msgpack
 from .core import Interface
 from .file import File
 from .utils import frame, framesplit, suffix, ignoring
@@ -81,14 +82,6 @@ class Numpy(Interface):
     def __exit__(self, *args):
         self.drop()
         self.partd.__exit__(self, *args)
-
-try:
-    from pandas import msgpack
-except ImportError:
-    try:
-        import msgpack
-    except ImportError:
-        msgpack = False
 
 
 def serialize(x):

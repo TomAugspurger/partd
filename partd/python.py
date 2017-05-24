@@ -5,17 +5,8 @@ to serialize.
 First we try msgpack (it's faster).  If that fails then we default to pickle.
 """
 from __future__ import absolute_import
-from .compatibility import pickle
 
-try:
-    from pandas import msgpack
-except ImportError:
-    try:
-        import msgpack
-    except ImportError:
-        msgpack = False
-
-
+from .compatibility import pickle, msgpack
 from .encode import Encode
 from functools import partial
 
